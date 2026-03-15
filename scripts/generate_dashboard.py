@@ -82,11 +82,18 @@ def scarcity(t, epsilon, eta):
     R = robot_pop(t, eta)
     return 1 + epsilon * (R - 1) / R
 
+R_BASE_SC = SCENARIOS["base"]["r"]   # r de referencia para escalar (escenario base)
+
 def V_pillar(t, capital, r, epsilon, eta):
     return capital * (1 + r)**t * phi_norm(t) * scarcity(t, epsilon, eta)
 
-def V_total(t, eta):
-    return sum(V_pillar(t, p["capital"], p["r"], p["epsilon"], eta) for p in PILLARS)
+def V_total(t, r_sc, eta):
+    """r_sc: r del escenario — escala r_i de cada pilar proporcionalmente."""
+    scale = r_sc / R_BASE_SC if R_BASE_SC > 0 else 1.0
+    return sum(
+        V_pillar(t, p["capital"], min(p["r"] * scale, 0.60), p["epsilon"], eta)
+        for p in PILLARS
+    )
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # CALCULAR SERIES TEMPORALES
@@ -116,7 +123,7 @@ for sc, params in SCENARIOS.items():
 # Valor total del portfolio por escenario (t=0..15)
 portfolio_series = {}
 for sc, params in SCENARIOS.items():
-    portfolio_series[sc] = [round(V_total(t, params["eta"]) / 1e6, 4) for t in T_RANGE]
+    portfolio_series[sc] = [round(V_total(t, params["r"], params["eta"]) / 1e6, 4) for t in T_RANGE]
 
 # Proyección por pilar (escenario base, cada año entero)
 T_YEARS = list(range(0, 16))  # 0..15
@@ -134,7 +141,7 @@ table_data = []
 for t in TABLE_YEARS:
     row = {"year": int(BASE_YEAR + t)}
     for sc, params in SCENARIOS.items():
-        row[sc] = round(V_total(t, params["eta"]) / 1e6, 2)
+        row[sc] = round(V_total(t, params["r"], params["eta"]) / 1e6, 2)
     row["phi"] = round(phi_norm(t), 3)
     row["R_base"] = round(robot_pop(t, SCENARIOS["base"]["eta"]), 2)
     row["R_opt"]  = round(robot_pop(t, SCENARIOS["optimo"]["eta"]), 2)
