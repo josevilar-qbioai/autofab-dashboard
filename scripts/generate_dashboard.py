@@ -41,17 +41,17 @@ SCENARIOS = {
     "optimo":     {"eta": 0.50, "r": 0.25, "color": "#4ade80",  "label": "Óptimo (η=0.50)"},
 }
 
-# Pilares del portfolio (capital real 2026-03-15)
-CAPITAL_TOTAL = 446471
+# ── Cartera ejemplo: €10.000 inicial, distribución ilustrativa ──────────────
+# Estos datos son ficticios y sirven únicamente como ejemplo pedagógico del modelo.
+CAPITAL_TOTAL = 10000
 PILLARS = [
-    {"name": "Bitcoin",        "capital": 294653, "epsilon": 1.00, "r": 0.25, "color": "#f59e0b"},
-    {"name": "Renta Variable", "capital": 100167, "epsilon": 0.15, "r": 0.10, "color": "#3b82f6"},
-    {"name": "Tecnología/AI",  "capital": 16517,  "epsilon": 0.70, "r": 0.20, "color": "#8b5cf6"},
-    {"name": "Metal Precioso", "capital": 8027,   "epsilon": 0.50, "r": 0.08, "color": "#eab308"},
-    {"name": "Metal",          "capital": 7994,   "epsilon": 0.40, "r": 0.08, "color": "#ef4444"},
-    {"name": "Nuclear",        "capital": 8418,   "epsilon": 0.55, "r": 0.15, "color": "#22c55e"},
-    {"name": "Energía/Grid",   "capital": 6334,   "epsilon": 0.45, "r": 0.12, "color": "#06b6d4"},
-    {"name": "Quantum",        "capital": 4361,   "epsilon": 0.90, "r": 0.30, "color": "#ec4899"},
+    {"name": "Escasez Digital (BTC)",  "capital": 4000, "epsilon": 1.00, "r": 0.25, "color": "#f59e0b"},
+    {"name": "Renta Variable Global",  "capital": 2000, "epsilon": 0.15, "r": 0.10, "color": "#3b82f6"},
+    {"name": "Tecnología / IA",        "capital": 1500, "epsilon": 0.70, "r": 0.20, "color": "#8b5cf6"},
+    {"name": "Energía / Nuclear",      "capital": 1000, "epsilon": 0.55, "r": 0.15, "color": "#22c55e"},
+    {"name": "Metales",                "capital":  800, "epsilon": 0.45, "r": 0.08, "color": "#eab308"},
+    {"name": "Computación Cuántica",   "capital":  400, "epsilon": 0.90, "r": 0.30, "color": "#ec4899"},
+    {"name": "Energía / Grid",         "capital":  300, "epsilon": 0.45, "r": 0.12, "color": "#06b6d4"},
 ]
 
 # ε ponderado
@@ -243,9 +243,9 @@ tr:hover td{{background:#1e293b22}}
     <div class="sub" style="color:#64748b">→ <span id="kpi-phi-2027">—</span> en 2027</div>
   </div>
   <div class="card kpi">
-    <div class="val" style="color:#79c0ff" id="kpi-capital">€446K</div>
-    <div class="lbl">Capital actual</div>
-    <div class="sub" style="color:#64748b">base de proyección</div>
+    <div class="val" style="color:#79c0ff" id="kpi-capital">€10K</div>
+    <div class="lbl">Capital ejemplo</div>
+    <div class="sub" style="color:#64748b">datos ilustrativos</div>
   </div>
   <div class="card kpi">
     <div class="val" style="color:#ffa657" id="kpi-eps">—</div>
@@ -364,7 +364,7 @@ tr:hover td{{background:#1e293b22}}
 <!-- NOTAS DE MODELO -->
 <div style="margin-top:16px;margin-bottom:30px;color:#475569;font-size:.78rem;text-align:center;line-height:1.6">
   Modelo V1.4 · Bass (1969), Rogers (1962), Kondratiev (1925) ·
-  Datos de portfolio: 2026-03-15 ·
+  <strong style="color:#f87171">Datos ilustrativos — cartera de ejemplo €10.000, no refleja ningún portfolio real</strong> ·
   <a href="https://github.com/josevilar-qbioai/autofab-dashboard" style="color:#38bdf8;text-decoration:none">GitHub</a>
 </div>
 
